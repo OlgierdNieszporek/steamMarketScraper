@@ -1,8 +1,8 @@
-from time import sleep
-
 from bs4 import BeautifulSoup
+from datetime import date, datetime
 import requests
 import strings
+
 
 def createProductsList(products_names, products_list):
     for case_name in products_names:
@@ -16,6 +16,17 @@ def createPricesList(prices, prices_list):
     return prices_list
 
 
+def getDate():
+    today = date.today()
+    return today
+
+
+def getTime():
+    now = datetime.now()
+    current_time = now.strftime("%H:%M:%S")
+    return current_time
+
+
 def scrapeStockMarket():
     product_list, price_list = [], []
     url = strings.url
@@ -27,4 +38,6 @@ def scrapeStockMarket():
     price_list = createPricesList(prices, price_list)
     print(product_list)
     print(price_list)
+    print(getDate())
+    print(getTime())
     return product_list, price_list
