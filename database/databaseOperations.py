@@ -7,7 +7,7 @@ def loadScrapedBuildSqlCommand(dictionary):
     i = 0
     for key in dictionary:
         i += 1
-        if(i == len(dictionary)):
+        if i == len(dictionary):
             sqlCommand += f"('{i}', '{key}', '{dictionary[key]}')\n"
         else:
             sqlCommand += f"('{i}', '{key}', '{dictionary[key]}'),\n"
@@ -17,8 +17,6 @@ def loadScrapedBuildSqlCommand(dictionary):
 def loadScrapeToDatabase():
     connection = connect()
     cursor, dictionary = connection.cursor(), scrapePage.scrapeStockMarket()
-    print(dictionary)
-    sql = loadScrapedBuildSqlCommand(dictionary)
-    cursor.execute(sql)
+    cursor.execute(loadScrapedBuildSqlCommand(dictionary))
     connection.commit()
     print("Data loaded successfully")
