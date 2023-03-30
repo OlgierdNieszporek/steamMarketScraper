@@ -1,6 +1,6 @@
 from bs4 import BeautifulSoup
+from pageScraper import strings
 import requests
-import strings
 
 def createDict(names, prices):
     dictionary = {}
@@ -19,12 +19,12 @@ def scrapeStockMarket():
     page_to_scrape = requests.get(url)
     soup = BeautifulSoup(page_to_scrape.text, "html.parser")
 
-    product_names = soup.findAll("td", attrs={"class": "colWalor textNowrap"})
+    product_names = soup.findAll("td", attrs={"class": strings.product_name_string})
     product_list = [name.text.strip() for name in product_names]
 
-    prices = soup.findAll("td", attrs={"class": "colKurs"})
-    prices_list = [price.text.strip() for price in prices]
+    prices = soup.findAll("td", attrs={"class": strings.prices_string})
+    prices_list = [price.text.strip().replace(",", ".") for price in prices]
 
     dictionary = createDict(product_list, prices_list)
 
-    printDict(dictionary)
+    return dictionary
