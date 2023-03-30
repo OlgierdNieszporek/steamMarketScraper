@@ -4,17 +4,26 @@ from .establishConnection import *
 
 def executeQuery(sql):
     connection = connect()
-    cursor, dictionary = connection.cursor(), scrapePage.scrapeStockMarket()
+    cursor = connection.cursor()
+    cursor.execute(sql)
+    connection.commit()
+    connection.close()
+
+
+def executeQueryReturn(sql):
+    connection = connect()
+    cursor = connection.cursor()
     cursor.execute(sql)
     connection.commit()
     result = cursor.fetchall()[0][0]
+    connection.close()
     return result
 
 def findMaxId():
-    if executeQuery('SELECT Count(*) from market') == 0:
+    if executeQueryReturn('SELECT Count(*) from market') == 0:
         return 0
     else:
-        return executeQuery('SELECT id FROM market ORDER BY id DESC LIMIT 1')
+        return executeQueryReturn('SELECT id FROM market ORDER BY id DESC LIMIT 1')
 
 def loadScrapedBuildSqlCommand(dictionary):
     current_max = findMaxId()
@@ -31,9 +40,6 @@ def loadScrapedBuildSqlCommand(dictionary):
 
 
 def loadScrapeToDatabase():
-    connection = connect()
-    cursor, dictionary = connection.cursor(), scrapePage.scrapeStockMarket()
-    cursor.execute(loadScrapedBuildSqlCommand(dictionary))
-    connection.commit()
+    dictionary = scrapePage.scrapeStockMarket()
+    executeQuery(loadScrapedBuildSqlCommand(dictionary))
     print("Data loaded successfully")
-    connection.close()
