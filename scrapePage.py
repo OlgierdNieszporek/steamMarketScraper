@@ -2,11 +2,6 @@ from bs4 import BeautifulSoup
 import requests
 import strings
 
-
-def scrapeSteamMarket():
-    iterateThroughWholeMarket()
-
-
 def createDict(names, prices):
     dictionary = {}
     for i in range(0, len(names)):
@@ -19,7 +14,7 @@ def printDict(dict):
         print(key, ': ', value)
 
 
-def iterateThroughWholeMarket():
+def scrapeStockMarket():
     url = strings.url
     page_to_scrape = requests.get(url)
     soup = BeautifulSoup(page_to_scrape.text, "html.parser")
