@@ -11,8 +11,7 @@ def executeQuery(sql):
     return result
 
 def findMaxId():
-    result = executeQuery('SELECT Count(*) from market')
-    if result == 0:
+    if executeQuery('SELECT Count(*) from market') == 0:
         return 0
     else:
         return executeQuery('SELECT id FROM market ORDER BY id DESC LIMIT 1')
