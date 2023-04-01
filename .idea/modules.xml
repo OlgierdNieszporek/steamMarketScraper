@@ -2,7 +2,7 @@
 <project version="4">
   <component name="ProjectModuleManager">
     <modules>
-      <module fileurl="file://$PROJECT_DIR$/.idea/steamMarketScraper.iml" filepath="$PROJECT_DIR$/.idea/steamMarketScraper.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/flask-mvc.iml" filepath="$PROJECT_DIR$/.idea/flask-mvc.iml" />
     </modules>
   </component>
 </project>
