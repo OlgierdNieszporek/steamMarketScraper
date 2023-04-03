@@ -10,5 +10,6 @@ from project.Database.databaseOperations import loadScrapeToDatabase
 # from project.pageScraper.ChartsGenerator import generateChart
 
 if __name__ == '__main__':
-    # loadScrapeToDatabase()
+    #loadScrapeToDatabase()
+    #print("chuj")
     app.run(host="localhost", port=8000, debug=True, use_reloader=False)

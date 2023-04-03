@@ -1,5 +1,6 @@
 from .establishConnection import *
 from ..pageScraper import scrapePage
+from project.pageScraper import systemOperations
 
 
 def executeQuery(sql):
@@ -39,6 +40,7 @@ def findMaxId():
     else:
         return executeQueryReturn('SELECT id FROM market ORDER BY id DESC LIMIT 1')[0][0]
 
+
 def loadScrapedBuildSqlCommand(dictionary):
     current_max = findMaxId()
     sqlCommand = 'INSERT INTO market VALUES '
@@ -47,11 +49,14 @@ def loadScrapedBuildSqlCommand(dictionary):
         i += 1
         current_max += 1
         if i == len(dictionary):
-            sqlCommand += f"('{current_max}', '{key}', '{dictionary[key]}')\n"
+            sqlCommand += f"('{current_max}', '{key}', '{dictionary[key]}', '{systemOperations.getCurrentDate()}')\n"
         else:
-            sqlCommand += f"('{current_max}', '{key}', '{dictionary[key]}'),\n"
+            sqlCommand += f"('{current_max}', '{key}', '{dictionary[key]}', '{systemOperations.getCurrentDate()}'),\n"
     return sqlCommand
 
+def removeDataFromDatabase():
+    sqlCommand = 'DELETE FROM market WHERE date ="' + str(systemOperations.getCurrentDateMinusTwoWeeks()) + '"'
+    return sqlCommand
 
 def loadScrapeToDatabase():
     dictionary = scrapePage.scrapeStockMarket()
