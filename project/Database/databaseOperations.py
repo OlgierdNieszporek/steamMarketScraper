@@ -1,5 +1,5 @@
-from pageScraper import scrapePage
 from .establishConnection import *
+from ..pageScraper import scrapePage
 
 
 def executeQuery(sql):
@@ -15,15 +15,29 @@ def executeQueryReturn(sql):
     cursor = connection.cursor()
     cursor.execute(sql)
     connection.commit()
-    result = cursor.fetchall()[0][0]
+    result = cursor.fetchall()
     connection.close()
     return result
 
+
+def getValuesFromDatabase(sql):
+    to_return = []
+    connection = connect()
+    cursor = connection.cursor()
+    cursor.execute(sql)
+    connection.commit()
+    result = cursor.fetchall()
+    for res in result:
+        to_return.append(res[0])
+    connection.close()
+    return to_return
+
+
 def findMaxId():
-    if executeQueryReturn('SELECT Count(*) from market') == 0:
+    if executeQueryReturn('SELECT Count(*) from market')[0][0] == 0:
         return 0
     else:
-        return executeQueryReturn('SELECT id FROM market ORDER BY id DESC LIMIT 1')
+        return executeQueryReturn('SELECT id FROM market ORDER BY id DESC LIMIT 1')[0][0]
 
 def loadScrapedBuildSqlCommand(dictionary):
     current_max = findMaxId()

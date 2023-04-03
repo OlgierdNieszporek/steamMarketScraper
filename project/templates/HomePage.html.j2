@@ -2,11 +2,24 @@
 <html>
   <head>
     <meta charset="utf-8">
+    <link rel="stylesheet" href="{{ url_for('static', filename='style/stylesheet.css') }}">
   </head>
-  <body>
-
-    <div>
-        {{ table }}
-    </div>
-  </body>
+    <body>
+      <header>
+        <div class="container">
+          <h1>Market Scrapper</h1>
+        </div>
+      </header>
+      <div class="container">
+        <section class="search">
+          <form>
+            <input type="text" placeholder="Wyszukaj po nazwie...">
+            <button>Szukaj</button>
+          </form>
+        </section>
+      </div>
+      <div>
+        {{table}}
+      </div>
+    </body>
 </html>

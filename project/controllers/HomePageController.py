@@ -3,12 +3,13 @@ import os
 import pandas as pd
 from project import app
 from flask import render_template, redirect, url_for, request
+from project.Database.databaseOperations import *
 
 
 #to jest mock danych do testow
-id = [0, 1]
-names = ['basic', 'test']
-values = [12, 15.223]
+id = getValuesFromDatabase('SELECT id FROM market')
+names = getValuesFromDatabase('SELECT product FROM market')
+values = getValuesFromDatabase('SELECT price FROM market')
 
 #route index
 @app.route('/')
