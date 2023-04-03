@@ -4,6 +4,8 @@ import pandas as pd
 from project import app
 from flask import render_template, redirect, url_for, request
 
+
+#to jest mock danych do testow
 id = [0, 1]
 names = ['basic', 'test']
 values = [12, 15.223]
@@ -13,7 +15,7 @@ values = [12, 15.223]
 def index():
     df = pd.DataFrame({
         'Id': [],
-        'Name':[],
+        'Name': [],
         'Value': []})
 
     for i in range(0, len(id)):

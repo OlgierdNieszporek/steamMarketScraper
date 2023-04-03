@@ -3,11 +3,11 @@
 
 
 class CompanyModel:
-    id= 0
-    productName = ''
-    productPrice = ''
-    updateDate = ''
-    updateTime = ''
+    id = int
+    productName = str
+    productPrice = float
+    updateDate = str
+    updateTime = str
 
 
 
