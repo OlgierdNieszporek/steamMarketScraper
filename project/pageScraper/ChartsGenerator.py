@@ -19,8 +19,9 @@ def generateChart(product_name, xAxis , yAxis):
     plt.xlabel('x')
     plt.ylabel('y')
 
-    full_filename = os.path.join(app.config['CHART_FOLDER'], 'project\Wykres_'+product_name+'.png')
+    full_filename = 'project\\'+os.path.join(app.config['CHART_FOLDER'], 'Wykres_'+product_name+'.png')
+    #full_filename = 'project\\static\\productCharts\\'
     print(full_filename)
-    plt.savefig('output.jpg')
-    plt.show()
+    plt.savefig(full_filename)
+    #plt.show()
 
