@@ -2,7 +2,6 @@ from .establishConnection import *
 from ..pageScraper import scrapePage
 from project.pageScraper import systemOperations
 
-
 def executeQuery(sql):
     connection = connect()
     cursor = connection.cursor()
@@ -34,6 +33,29 @@ def getValuesFromDatabase(sql):
     return to_return
 
 
+def fetchNewestDateFromDatabase():
+    newestDate = getValuesFromDatabase('SELECT date FROM market ORDER BY date DESC LIMIT 1')[0]
+    return newestDate
+
+
+def fetchNewestIds():
+    ids = getValuesFromDatabase('SELECT id FROM market WHERE date ="' + str(fetchNewestDateFromDatabase()) + '"')
+    return ids
+
+
+def fetchNames():
+    newestDate = fetchNewestDateFromDatabase()
+    names = getValuesFromDatabase('SELECT product FROM market WHERE date ="' + str(newestDate) + '"')
+    return names
+
+
+def fetchNewestValues():
+    newestDate = fetchNewestDateFromDatabase()
+    values = getValuesFromDatabase('SELECT price FROM market WHERE date ="' + str(newestDate) + '"')
+    return values
+
+
+
 def findMaxId():
     if executeQueryReturn('SELECT Count(*) from market')[0][0] == 0:
         return 0
@@ -54,11 +76,14 @@ def loadScrapedBuildSqlCommand(dictionary):
             sqlCommand += f"('{current_max}', '{key}', '{dictionary[key]}', '{systemOperations.getCurrentDate()}'),\n"
     return sqlCommand
 
-def removeDataFromDatabase():
-    sqlCommand = 'DELETE FROM market WHERE date ="' + str(systemOperations.getCurrentDateMinusTwoWeeks()) + '"'
-    return sqlCommand
 
 def loadScrapeToDatabase():
     dictionary = scrapePage.scrapeStockMarket()
     executeQuery(loadScrapedBuildSqlCommand(dictionary))
     print("Data loaded successfully")
+
+
+def removeDataFromDatabase():
+    sqlCommand = 'DELETE FROM market WHERE date ="' + str(systemOperations.getCurrentDateMinusTwoWeeks()) + '"'
+    return sqlCommand
+
