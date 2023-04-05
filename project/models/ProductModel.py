@@ -1,4 +1,6 @@
 class ProductModel:
+    def __init__(self):
+        pass
     def __init__(self, id, productName, productPrice, date):
         self.id = id
         self.productName = productName
