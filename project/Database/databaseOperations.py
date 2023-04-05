@@ -1,6 +1,8 @@
 from .establishConnection import *
+from ..models.ProductModel import ProductModel
 from ..pageScraper import scrapePage
 from project.pageScraper import systemOperations
+
 
 def executeQuery(sql):
     connection = connect()
@@ -55,7 +57,6 @@ def fetchNewestValues():
     return values
 
 
-
 def findMaxId():
     if executeQueryReturn('SELECT Count(*) from market')[0][0] == 0:
         return 0
@@ -87,3 +88,35 @@ def removeDataFromDatabase():
     sqlCommand = 'DELETE FROM market WHERE date ="' + str(systemOperations.getCurrentDateMinusTwoWeeks()) + '"'
     return sqlCommand
 
+
+def getAllProducts():
+    products = []
+    newestDate = getValuesFromDatabase('SELECT date FROM market ORDER BY date DESC LIMIT 1')[0]
+    id = getValuesFromDatabase('SELECT id FROM market WHERE date ="' + str(newestDate) + '"')
+    names = getValuesFromDatabase('SELECT product FROM market WHERE date ="' + str(newestDate) + '"')
+    values = getValuesFromDatabase('SELECT price FROM market WHERE date ="' + str(newestDate) + '"')
+    date = getValuesFromDatabase('SELECT date FROM market WHERE date ="' + str(newestDate) + '"')
+    for i in id:
+        newValue = ProductModel(id[i], names[i], values[i], date[i])
+        products.append(newValue)
+    return products
+
+
+def getProductByName(productName):
+    product = ProductModel()
+    product.date = getValuesFromDatabase('SELECT date FROM market WHERE product ="' + productName + '"')[0]
+    product.id = getValuesFromDatabase('SELECT id FROM market WHERE product ="' + productName + '"')[0]
+    product.name = getValuesFromDatabase('SELECT product FROM market WHERE product ="' + productName + '"')[0]
+    product.value = getValuesFromDatabase('SELECT price FROM market WHERE product ="' + productName + '"')[0]
+    product.date = getValuesFromDatabase('SELECT date FROM market WHERE product ="' + productName + '"')[0]
+    return product
+
+
+def getProductByID(productID):
+    product = ProductModel()
+    product.date = getValuesFromDatabase('SELECT date FROM market WHERE id ="' + str(productID) + '"')[0]
+    product.id = getValuesFromDatabase('SELECT id FROM market WHERE id ="' + str(productID) + '"')[0]
+    product.name = getValuesFromDatabase('SELECT product FROM market WHERE id ="' + str(productID) + '"')[0]
+    product.value = getValuesFromDatabase('SELECT price FROM market WHERE id ="' + str(productID) + '"')[0]
+    product.date = getValuesFromDatabase('SELECT date FROM market WHERE id ="' + str(productID) + '"')[0]
+    return product
