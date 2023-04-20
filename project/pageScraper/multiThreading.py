@@ -17,4 +17,4 @@ def worker():
 
 def runApp():
     threading.Thread(target=worker, daemon=False).start()
-    threading.Thread(target=master(), daemon=False).start()
+    threading.Thread(target=master, daemon=False).start()
