@@ -1,5 +1,8 @@
 import schedule
 import time
+
+from apscheduler.schedulers.background import BackgroundScheduler
+
 from project.Database.databaseOperations import *
 
 def job():
@@ -16,7 +19,6 @@ def job():
 
 
 def runScheduler():
-    schedule.every().day.at("18:00").do(job)
-    while True:
-        schedule.run_pending()
-        time.sleep(1)
+    sched = BackgroundScheduler(daemon=True)
+    sched.add_job(job, 'interval', seconds=5)
+    sched.start()
