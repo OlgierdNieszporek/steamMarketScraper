@@ -6,4 +6,4 @@ from project.Database.databaseOperations import loadScrapeToDatabase
 
 
 if __name__ == '__main__':
-    app.run(host='0.0.0.0', debug=True, use_reloader=False)
+    app.run(host='0.0.0.0', debug=False, use_reloader=False)
