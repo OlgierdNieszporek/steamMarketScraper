@@ -7,8 +7,7 @@ from project import app
 def master():
     while True:
         # app.run(host="localhost", port=8000, debug=True, use_reloader=False)
-        # app.run(host='0.0.0.0', debug=True, use_reloader=False)
-        app.run()
+        app.run(host='0.0.0.0', debug=True, use_reloader=False)
 
 
 def worker():
