@@ -1,1 +1,1 @@
-web: gunicorn server:runApp --host=0.0.0.0 --port=${PORT:-5000}
+web: uvicorn server:runApp --host=0.0.0.0 --port=${PORT:-5000}
