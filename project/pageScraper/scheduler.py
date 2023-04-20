@@ -9,16 +9,16 @@ from project.Database.databaseOperations import *
 iterator = 0
 
 def job():
-        #screapeData
-        #loadScrapeToDatabase()
+    #screapeData
+    #loadScrapeToDatabase()
 
-        #deleteFromDBIfOlderThanTwoWeeks
-        #removeDataFromDatabase()
+    #deleteFromDBIfOlderThanTwoWeeks
+    #removeDataFromDatabase()
 
-        #generateNewCharts
+     #generateNewCharts
 
-        #updateFront
-        print("Done scheduled tasks")
+    #updateFront
+    print("Done scheduled tasks")
 
 
 
