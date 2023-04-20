@@ -6,25 +6,18 @@ import time
 from apscheduler.schedulers.background import BackgroundScheduler
 
 from project.Database.databaseOperations import *
-iterator = 0
-
 def job():
-    nonlocal iterator
-    if iterator%2!=0 :
-        iterator +=1
-        return "Dupa cyce"
-    else:
-        #screapeData
-        #loadScrapeToDatabase()
 
-        #deleteFromDBIfOlderThanTwoWeeks
-        #removeDataFromDatabase()
+    #screapeData
+    #loadScrapeToDatabase()
 
-        #generateNewCharts
+    #deleteFromDBIfOlderThanTwoWeeks
+    #removeDataFromDatabase()
 
-        #updateFront
-        print("Done scheduled tasks")
+    #generateNewCharts
 
+    #updateFront
+    print("Done scheduled tasks")
 
 
 def runScheduler():
