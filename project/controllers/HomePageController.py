@@ -5,7 +5,7 @@ from flask import render_template, redirect, url_for, request
 
 from project.Database.databaseOperations import getAllProducts
 
-
+runScheduler()
 # route index
 @app.route('/')
 def index():
