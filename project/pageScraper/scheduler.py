@@ -1,3 +1,5 @@
+import multiprocessing
+
 import schedule
 import time
 
@@ -20,5 +22,12 @@ def job():
 
 def runScheduler():
     sched = BackgroundScheduler(daemon=True)
-    sched.add_job(job, 'interval', seconds=5)
+    sched.add_job(job, 'interval', seconds=10)
     sched.start()
+
+    if not multiprocessing.current_process().name == 'MainProcess':
+        sched.shutdown()
+
+    # sched = BackgroundScheduler(daemon=True)
+    # sched.add_job(job, 'interval', seconds=5)
+    # sched.start()
