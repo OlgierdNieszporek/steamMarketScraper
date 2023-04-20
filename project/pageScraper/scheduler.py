@@ -9,22 +9,26 @@ from project.Database.databaseOperations import *
 iterator = 0
 
 def job():
-    #screapeData
-    #loadScrapeToDatabase()
+    nonlocal iterator
+    if iterator%2!=0 :
+        iterator +=1
+        return "Dupa cyce"
+    else:
+        #screapeData
+        #loadScrapeToDatabase()
 
-    #deleteFromDBIfOlderThanTwoWeeks
-    #removeDataFromDatabase()
+        #deleteFromDBIfOlderThanTwoWeeks
+        #removeDataFromDatabase()
 
-     #generateNewCharts
+        #generateNewCharts
 
-    #updateFront
-    print("Done scheduled tasks")
+        #updateFront
+        print("Done scheduled tasks")
 
 
 
 def runScheduler():
     sched = BackgroundScheduler(daemon=False)
     sched.add_job(job, 'interval', seconds=5)
-    print("dupacycejakdonice")
     sched.start()
     atexit.register(lambda: sched.shutdown())
