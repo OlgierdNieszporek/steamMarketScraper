@@ -1,1 +1,1 @@
-web: gunicorn main:app --no-reload
+web: gunicorn main:app --workers 1
