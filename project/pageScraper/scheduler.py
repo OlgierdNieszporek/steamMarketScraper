@@ -21,7 +21,7 @@ def job():
 
 
 def runScheduler():
-    sched = BackgroundScheduler(daemon=True)
+    sched = BackgroundScheduler(daemon=False)
     sched.add_job(job, 'interval', seconds=5)
     sched.start()
     atexit.register(lambda: sched.shutdown())
