@@ -1,1 +1,1 @@
-marketScraper: python server.py
+web: gunicorn server:runApp
