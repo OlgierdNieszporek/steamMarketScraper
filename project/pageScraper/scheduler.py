@@ -1,13 +1,18 @@
 import schedule
 import time
-
+from project.Database.databaseOperations import *
 
 def job():
-    #screapeData()
-    #deleteFromDBIfOlderThanTwoWeeks()
+    #screapeData
+    #loadScrapeToDatabase()
+
+    #deleteFromDBIfOlderThanTwoWeeks
+    #removeDataFromDatabase()
+
     #generateNewCharts()
+
     #updateFront()
-    print("Reading time...")
+    print("Done scheduled tasks")
 
 
 def runScheduler():
