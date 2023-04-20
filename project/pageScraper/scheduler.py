@@ -14,9 +14,9 @@ def job():
     #deleteFromDBIfOlderThanTwoWeeks
     #removeDataFromDatabase()
 
-    #generateNewCharts()
+    #generateNewCharts
 
-    #updateFront()
+    #updateFront
     print("Done scheduled tasks")
 
 

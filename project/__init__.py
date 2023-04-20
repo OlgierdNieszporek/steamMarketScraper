@@ -4,5 +4,6 @@ from project.pageScraper.scheduler import *
 
 
 app = Flask("project")
-runScheduler()
+#runScheduler()
+
 from project.controllers import *
