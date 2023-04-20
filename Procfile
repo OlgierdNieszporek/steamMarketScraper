@@ -1,1 +1,1 @@
-web: gunicorn main:runApp
+web: gunicorn main:app
