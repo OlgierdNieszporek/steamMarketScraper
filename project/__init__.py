@@ -3,6 +3,7 @@ from flask import Flask
 from project.pageScraper.scheduler import *
 
 
-
+app = Flask(__name__)
+runScheduler()
 
 from project.controllers import *

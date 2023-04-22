@@ -1,7 +1,6 @@
 import threading
 
-#from project import app#, scheduler
-from project.controllers.HomePageController import *
+from project import app#, scheduler
 from project.Database.databaseOperations import loadScrapeToDatabase
 # from project.pageScraper.ChartsGenerator import generateChart
 from project.pageScraper.scheduler import *
