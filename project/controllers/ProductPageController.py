@@ -19,7 +19,7 @@ def show_index(product_name):
 
     #
     return render_template("ProductPage.html.j2",
-                           product_chart_image=full_filename,
+                          # product_chart_image=full_filename,
                            product_name=product.productName,
                            product_price=product.productPrice,
                            utc_dt=product.date
