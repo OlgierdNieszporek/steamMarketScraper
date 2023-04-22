@@ -1,6 +1,6 @@
 import threading
 
-from project import app, sched
+from project import app
 from project.Database.databaseOperations import loadScrapeToDatabase
 # from project.pageScraper.ChartsGenerator import generateChart
 from project.pageScraper.scheduler import *
