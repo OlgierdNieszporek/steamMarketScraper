@@ -8,6 +8,8 @@ print('chuj')
 app = Flask(__name__)
 print('aaaa')
 sched = APScheduler()
+sched.add_job(id='Scheduled job', func=schedulerJob, trigger='interval', seconds=5)
+sched.start()
 from project.controllers import *
 
 #runScheduler()
