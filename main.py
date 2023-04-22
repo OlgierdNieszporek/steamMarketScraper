@@ -11,6 +11,6 @@ if __name__ == '__main__':
 
     from waitress import serve
 
-    serve(app, host="0.0.0.0", port=8080, debug=False, use_reloader=False)
+    serve(app, host="0.0.0.0", port=8080)
     #runScheduler()
     #app.run(debug=False, use_reloader=False)
