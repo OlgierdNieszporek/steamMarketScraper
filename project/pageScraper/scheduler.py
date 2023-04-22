@@ -22,7 +22,7 @@ def job():
 
 def runScheduler():
     sched = BackgroundScheduler(daemon=True)
-    sched.add_job(job, 'interval', days=1, start_date=datetime.now().replace(hour=21, minute=10, second=0, microsecond=0))
+    sched.add_job(job, 'interval', days=1, start_date=datetime.now().replace(hour=21, minute=18, second=0, microsecond=0))
     sched.start()
     #atexit.register(lambda: sched.shutdown())
 
