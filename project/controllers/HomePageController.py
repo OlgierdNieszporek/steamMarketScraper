@@ -1,6 +1,6 @@
 import os
 import pandas as pd
-from project import app, runScheduler
+from project import app#, runScheduler
 from flask import render_template, redirect, url_for, request
 
 from project.Database.databaseOperations import getAllProducts
