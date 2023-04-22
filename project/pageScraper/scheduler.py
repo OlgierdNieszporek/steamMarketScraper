@@ -20,7 +20,7 @@ def job():
     print("Done scheduled tasks")
 
 def runScheduler():
-    sched = BackgroundScheduler(daemon=False)
+    sched = BackgroundScheduler(daemon=True)
     sched.add_job(job, 'interval', seconds=5)
     sched.start()
     atexit.register(lambda: sched.shutdown())
