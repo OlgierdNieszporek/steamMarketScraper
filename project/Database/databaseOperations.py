@@ -93,7 +93,7 @@ def getAllProducts():
     products = []
     #newestDate = getValuesFromDatabase('SELECT date FROM market ORDER BY date DESC LIMIT 1')[0]
     newestDate = getValuesFromDatabase('SELECT DISTINCT date FROM market ORDER BY date DESC')[0]
-    yesterday = getValuesFromDatabase('SELECT DISTINCT date FROM market ORDER BY date DESC')[1]
+    yesterday = getValuesFromDatabase('SELECT DISTINCT date FROM market ORDER BY date DESC')[0]
     id = getValuesFromDatabase('SELECT id FROM market WHERE date ="' + str(newestDate) + '"')
     names = getValuesFromDatabase('SELECT product FROM market WHERE date ="' + str(newestDate) + '"')
     values = getValuesFromDatabase('SELECT price FROM market WHERE date ="' + str(newestDate) + '"')
@@ -110,7 +110,7 @@ def getAllProducts():
         if  k0 != 0 and k1 != 0 :
             roi =(k1 - k0) / k0
 
-        newValue = ProductModel(i, names[i],valuesOld[i], values[i], roi, date[i])
+        newValue = ProductModel(i, names[i], values[i], roi, date[i])
         #newValue = ProductModel(id[i], names[i], values[i], date[i]) #indeksowanie zgodne z bazą
         products.append(newValue)
     return products
