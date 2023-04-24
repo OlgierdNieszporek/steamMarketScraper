@@ -13,11 +13,12 @@ def index():
         'No.': [],
         'Name': [],
         'Value': [],
+        'ROI': [],
         'Date': []})
     products = getAllProducts()
     # print(products.count())
-    for x in products:
-        df.loc[x.id] = [x.id, x.productName, x.productPrice, x.date]
+    for product in products:
+        df.loc[product.id] = [product.id, product.productName, product.productPrice, product.ROI, product.date]
 
     df['Name'] = df['Name'].apply(lambda x: f'<a href="../{x}">{x}</a>')
     table = df.to_html(index=False, escape=False)

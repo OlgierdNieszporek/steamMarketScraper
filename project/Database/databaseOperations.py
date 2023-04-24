@@ -2,7 +2,7 @@ from .establishConnection import *
 from ..models.ProductModel import ProductModel
 from ..pageScraper import scrapePage
 from project.pageScraper import systemOperations
-
+import re
 
 def executeQuery(sql):
     connection = connect()
@@ -91,13 +91,27 @@ def removeDataFromDatabase():
 
 def getAllProducts():
     products = []
-    newestDate = getValuesFromDatabase('SELECT date FROM market ORDER BY date DESC LIMIT 1')[0]
+    #newestDate = getValuesFromDatabase('SELECT date FROM market ORDER BY date DESC LIMIT 1')[0]
+    newestDate = getValuesFromDatabase('SELECT DISTINCT date FROM market ORDER BY date DESC')[0]
+    yesterday = getValuesFromDatabase('SELECT DISTINCT date FROM market ORDER BY date DESC')[1]
     id = getValuesFromDatabase('SELECT id FROM market WHERE date ="' + str(newestDate) + '"')
     names = getValuesFromDatabase('SELECT product FROM market WHERE date ="' + str(newestDate) + '"')
     values = getValuesFromDatabase('SELECT price FROM market WHERE date ="' + str(newestDate) + '"')
+    values_old = getValuesFromDatabase('SELECT price FROM market WHERE date ="' + str(yesterday) + '"')
     date = getValuesFromDatabase('SELECT date FROM market WHERE date ="' + str(newestDate) + '"')
-    for i in id:
-        newValue = ProductModel(id[i - 1], names[i - 1], values[i - 1], date[i - 1])
+
+
+
+    for i in range(0, len(id)):
+        #tutaj byl blad ze w bazie mi pobieralo jakas z dupy warotsc dlatego wywalamy wszystko co jest przed spacja
+        k0 = float(re.sub(r'^\S*\s', '', values_old[i]))
+        k1 = float(re.sub(r'^\S*\s', '', values[i]))
+        roi = 0
+        if  k0 != 0 and k1 != 0 :
+            roi =(k1 - k0) / k0
+
+        newValue = ProductModel(i, names[i],valuesOld[i], values[i], roi, date[i])
+        #newValue = ProductModel(id[i], names[i], values[i], date[i]) #indeksowanie zgodne z bazą
         products.append(newValue)
     return products
 
@@ -110,11 +124,7 @@ def getProductByName(productName):
         getValuesFromDatabase('SELECT price FROM market WHERE product ="' + productName + '"')[0],
         getValuesFromDatabase('SELECT date FROM market WHERE product ="' + productName + '"')[0]
     )
-    # product.date = getValuesFromDatabase('SELECT date FROM market WHERE product ="' + productName + '"')[0]
-    # product.id = getValuesFromDatabase('SELECT id FROM market WHERE product ="' + productName + '"')[0]
-    # product.name = getValuesFromDatabase('SELECT product FROM market WHERE product ="' + productName + '"')[0]
-    # product.value = getValuesFromDatabase('SELECT price FROM market WHERE product ="' + productName + '"')[0]
-    # product.date = getValuesFromDatabase('SELECT date FROM market WHERE product ="' + productName + '"')[0]
+
     return product
 
 
@@ -127,9 +137,5 @@ def getProductByID(productID):
             getValuesFromDatabase('SELECT date FROM market WHERE id ="' + str(productID) + '"')[0]
         )
     )
-    # product.date = getValuesFromDatabase('SELECT date FROM market WHERE id ="' + str(productID) + '"')[0]
-    # product.id = getValuesFromDatabase('SELECT id FROM market WHERE id ="' + str(productID) + '"')[0]
-    # product.name = getValuesFromDatabase('SELECT product FROM market WHERE id ="' + str(productID) + '"')[0]
-    # product.value = getValuesFromDatabase('SELECT price FROM market WHERE id ="' + str(productID) + '"')[0]
-    # product.date = getValuesFromDatabase('SELECT date FROM market WHERE id ="' + str(productID) + '"')[0]
+
     return product
