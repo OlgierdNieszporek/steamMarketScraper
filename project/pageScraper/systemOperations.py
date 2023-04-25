@@ -6,6 +6,7 @@ def getCurrentDate():
     return current_date
 
 
-def getCurrentDateMinusTwoWeeks():
-    date = datetime.datetime.now() - datetime.timedelta(days=14)
+def getCurrentDateMinusWeek():
+    date = datetime.datetime.now() - datetime.timedelta(days=7)
+    print(date)
     return date

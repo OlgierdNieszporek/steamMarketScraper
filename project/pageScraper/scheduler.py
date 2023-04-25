@@ -12,18 +12,14 @@ def job():
     #screapeData
     loadScrapeToDatabase()
     print("Done loading scrape to database")
-
-    #deleteFromDBIfOlderThanTwoWeeks
-    #removeDataFromDatabase()
-
+    removeDataFromDatabase()
+    print("Removed old data from database")
     #generateNewCharts
-
-    #updateFront
     print("Done scheduled tasks")
 
 def runScheduler():
     sched = BackgroundScheduler(daemon=True)
-    sched.add_job(job, 'interval', days=1, start_date=datetime.now().replace(hour=23, minute=38, second=55, microsecond=0))
+    sched.add_job(job, 'interval', days=1, start_date=datetime.now().replace(hour=16, minute=0, second=0, microsecond=0))
     sched.start()
     #atexit.register(lambda: sched.shutdown())
 
