@@ -140,3 +140,11 @@ def getProductByID(productID):
     )
 
     return product
+
+
+def getProductHistory(productName):
+    pricesHistory = getValuesFromDatabase(
+        'SELECT price FROM market WHERE product ="' + str(productName) + '"' + 'ORDER BY date')
+    dates = getValuesFromDatabase('SELECT date FROM market WHERE product ="' + str(productName) + '"' + 'ORDER BY date')
+    history = [pricesHistory, dates]
+    return history
