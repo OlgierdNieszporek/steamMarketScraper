@@ -24,8 +24,9 @@ def show_index(product_name):
     for i in range(0, len(productHistory[1])):
         df.loc[i] = [(productHistory[1])[i], (productHistory[0])[i]]
 
-    table = df.to_html(index=False, escape=False)
-    #df.transpose(table)
+    dfTransposed = df.set_index(['Date', 'Price']).T
+    table = dfTransposed.to_html(index=False, escape=False)
+
     #return render_template("ProductPage.html.j2", table = table, name = product_name, price = product.productPrice)
     return render_template("ProductPage.html.j2", table = table)
     # product = getProductByName(product_name)
