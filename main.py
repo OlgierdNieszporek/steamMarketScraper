@@ -6,5 +6,5 @@ from project.Database.databaseOperations import loadScrapeToDatabase
 from project.pageScraper.scheduler import *
 
 if __name__ == '__main__':
-    print('guwno')
+    print('jajco')
     app.run(use_reloader=False)
