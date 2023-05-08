@@ -14,7 +14,6 @@ def job():
     print("Done loading scrape to database")
     removeDataFromDatabase()
     print("Removed old data from database")
-    #generateNewCharts
     print("Done scheduled tasks")
 
 def runScheduler():
@@ -23,5 +22,3 @@ def runScheduler():
     sched.start()
     #atexit.register(lambda: sched.shutdown())
 
-# def schedulerJob():
-#     print("Jebać disa skurwysyna")
