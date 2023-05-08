@@ -1,6 +1,6 @@
 from bs4 import BeautifulSoup
-from pageScraper import strings
 import requests
+from project.pageScraper import strings
 
 def createDict(names, prices):
     dictionary = {}
