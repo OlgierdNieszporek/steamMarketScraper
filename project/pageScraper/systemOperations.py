@@ -2,7 +2,7 @@ import datetime
 
 
 def getCurrentDate():
-    current_date = datetime.date.today() + datetime.timedelta()
+    current_date = datetime.date.today()
     return current_date
 
 
