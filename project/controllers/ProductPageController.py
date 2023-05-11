@@ -27,7 +27,7 @@ def show_index(product_name):
         k1 = float(productHistory[0][6])
         k0 = float(productHistory[0][5])
 
-        roi = round(((k1 - k0) / k0), 2)
+        roi = round(float((k1 - k0) / k0), 4)
 
         for i in range(0, len(productHistory[1])):
             df.loc[i] = [(productHistory[1])[i], (productHistory[0])[i]]
