@@ -107,7 +107,7 @@ def getAllProducts():
         k0 = float(re.sub(r'^\S*\s', '', values_old[i]))
         k1 = float(re.sub(r'^\S*\s', '', values[i]))
         # if  k0 != 0 and k1 != 0 :
-        roi = round(((k1 - k0) / k0), 2)
+        roi = round(float((k1 - k0) / k0), 4)
 
         strRoi = str(roi) + "%"
 
@@ -146,6 +146,7 @@ def getProductHistory(productName):
         'SELECT price FROM market WHERE product ="' + str(productName) + '"' + 'ORDER BY date')
     dates = getValuesFromDatabase('SELECT date FROM market WHERE product ="' + str(productName) + '"' + 'ORDER BY date')
     history = [pricesHistory, dates]
+    print(history)
     return history
 
 
